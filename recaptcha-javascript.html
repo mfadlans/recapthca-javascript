@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>reCAPTCHA demo: JavaScript API examples</title>
+    <script type="text/javascript">
+      var verifyCallback = function(response) {
+        alert(response);
+      };
+      var clientId1;
+      var clientId2;
+      var onloadCallback = function() {
+        clientId1 = grecaptcha.render('example1', {
+          'sitekey' : '6Ld66SkUAAAAAHZflctYIv5QT0upZptRFs-FzojN',
+          'theme' : 'light'
+        });
+        clientId2 = grecaptcha.render(
+            document.getElementById('example2'), {
+	      'sitekey' : '6Ld66SkUAAAAAHZflctYIv5QT0upZptRFs-FzojN'
+            });
+        grecaptcha.render('example3', {
+          'sitekey' : '6Ld66SkUAAAAAHZflctYIv5QT0upZptRFs-FzojN',
+          'callback' : verifyCallback,
+          'theme' : 'dark'
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <form action="javascript:alert(grecaptcha.getResponse(clientId1));">
+      <div id="example1"></div>
+      <br>
+      <input type="submit" value="getResponse">
+    </form>
+    <br>
+    <form action="javascript:grecaptcha.reset(clientId2);">
+      <div id="example2"></div>
+      <br>
+      <input type="submit" value="reset">
+    </form>
+    <br>
+    <form action="?" method="POST">
+      <div id="example3"></div>
+      <br>
+      <input type="submit" value="Submit">
+    </form>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+  </body>
+</html>
+
